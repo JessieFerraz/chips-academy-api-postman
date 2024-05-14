@@ -1,3 +1,5 @@
+[![Postman Tests](https://github.com/JessieFerraz/chips-academy-api-postman/actions/workflows/pipelinePostman.yml/badge.svg)](https://github.com/JessieFerraz/chips-academy-api-postman/actions/workflows/pipelinePostman.yml)
+
 # chips-academy-api-postman
 
 ## Descrição
