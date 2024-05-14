@@ -1,0 +1,5010 @@
+{
+	"info": {
+		"_postman_id": "56a282fe-b9d3-4b73-b44b-75ae95610173",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29167783"
+	},
+	"item": [
+		{
+			"name": "Novo cadastro de login",
+			"item": [
+				{
+					"name": "Teste Com Sucesso",
+					"item": [
+						{
+							"name": "Validar o token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check token is true\", function (){\r",
+											"    pm.expect(JSON.parse(responseBody).valid)\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTMzMGZlZWU3NjA2NGY0NTlkNWYxMGQiLCJmdWxsTmFtZSI6IlFhLUNvZGVycy1TWVNBRE1JTiIsIm1haWwiOiJzeXNhZG1pbkBxYWNvZGVycy5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRhTXo4NTRBRmpETWtwUWZ6a040alh1Q05rQWpWSEsvRlR5Lll0WmF3M2pHcHpzL1RnbUtpSyIsImFjY2Vzc1Byb2ZpbGUiOiJTWVNBRE1JTiIsImNwZiI6IjExMTExMTExMTExIiwic3RhdHVzIjp0cnVlLCJhdWRpdCI6W3sicmVnaXN0ZXJlZEJ5Ijp7InVzZXJJZCI6IjExMTExMTExMTExMTExMTExMSIsInVzZXJMb2dpbiI6InN5c2FkbWluQHFhY29kZXJzLmNvbSJ9LCJyZWdpc3RyYXRpb25EYXRlIjoic2V4dGEtZmVpcmEsIDIwLzEwLzIwMjMsIDIwOjQwOjMwIEJSVCIsInJlZ2lzdHJhdGlvbk51bWJlciI6IjAxIiwiY29tcGFueUlkIjoiUWEuQ29kZXJzIiwiX2lkIjoiNjUzMzBmZWVlNzYwNjRmNDU5ZDVmMTBlIn1dLCJfX3YiOjAsImlhdCI6MTcwODg2NTM3OCwiZXhwIjoxNzA4OTUxNzc4fQ.czys6HsqC0JCXEobt_ZTa5tqVDg_-oZzqXfOUrQNWV0",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/validateToken",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"validateToken"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Login efetuado com sucesso\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgAuthSucesso\")).to.eql(JSON.parse(responseBody).msg)\r",
+											"});\r",
+											"\r",
+											"pm.environment.set(\"token\", pm.variables.replaceIn(JSON.parse(responseBody).token));\r",
+											"\r",
+											"pm.test(\"Check token is true\", function (){\r",
+											"    pm.expect(JSON.parse(responseBody).token).exist\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"mail\": \"sysadmin@qacoders.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/login/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"login",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Novo cadastro de login com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"userId\", JSON.parse(responseBody).user._id);\r",
+											" \r",
+											"pm.sendRequest({\r",
+											"    url: `${pm.environment.get(\"url\")}/api/user/${pm.environment.get(\"userId\")}`,\r",
+											"    method: 'GET',\r",
+											"    header: {\r",
+											"        \"Authorization\": `${pm.environment.get(\"token\")}`\r",
+											"    }\r",
+											"}, function (err, response) {\r",
+											"            try{\r",
+											"                pm.expect(response.json()).exist;\r",
+											"                testResult = true\r",
+											"            } catch(error){\r",
+											"                testResult = false\r",
+											"                  pm.test(\"Create user\", function () {\r",
+											"                    pm.expect(true).to.eql(testResult);\r",
+											"                });\r",
+											"            }\r",
+											"            if (testResult !== false){\r",
+											"                pm.test(\"User created and saved in the database.\", function () {\r",
+											"                    pm.expect(pm.environment.get(\"userId\")).to.eql(response.json()._id);\r",
+											"                });\r",
+											"                pm.test(\"Status fullName is true\", function () {\r",
+											"                    pm.expect(pm.environment.get(\"fullName\")).to.eql(response.json().fullName);\r",
+											"                });\r",
+											"                pm.test(\"Status email is true\", function () {\r",
+											"                    pm.expect(pm.environment.get(\"email\")).to.eql(response.json().mail);\r",
+											"                });\r",
+											"                pm.test(\"Status cpf is true\", function () {\r",
+											"                    pm.expect(pm.environment.get(\"cpf\")).to.eql(response.json().cpf);\r",
+											"                });\r",
+											"                pm.test(\"Status code is 201\", function () {\r",
+											"                    pm.response.to.have.status(201);\r",
+											"                });\r",
+											"            }\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Usuário autenticado com sucesso\", function () {\r",
+											"    var jsonName = pm.response.json();\r",
+											"    var expectedMessage = \"Olá \" + pm.environment.get(\"fullName\") + \", cadastro realizado com sucesso.\";\r",
+											"    pm.expect(jsonName.msg).to.eql(expectedMessage);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const firstName = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+											"const lastName = pm.variables.replaceIn('{{$randomLastName}}')\r",
+											"const fullName = `${firstName} ${lastName}`\r",
+											"const email = `${firstName}_${lastName}@example.com`\r",
+											"pm.environment.set(\"fullName\", fullName)\r",
+											"\r",
+											"pm.environment.set(\"email\", email.toLowerCase())\r",
+											"\r",
+											"pm.environment.set(\"password\", pm.variables.replaceIn('{{password}}'))\r",
+											"\r",
+											"function generateCpf() {\r",
+											"    let cpf = ''\r",
+											"    for(let i=0; i<11; i++) { \r",
+											"        cpf += `${Math.floor(Math.random() * 9)}`\r",
+											"    }\r",
+											"    return cpf;\r",
+											"}\r",
+											"pm.environment.set(\"cpf\",pm.variables.replaceIn(generateCpf()))\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Nome Sem Sucesso",
+					"item": [
+						{
+							"name": "400 Campo Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalidEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 +100 caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalidMaxCharacters\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"João Maria da Silva Costa Soares Menezes Lima Souza de Jesus Gonçalves Pereira Ferrares dos Santos Jr\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Com Número",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalidNumber\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"João Maria 3 da Silva\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Com Caractere Especial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalid\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"João Maria @ da Silva\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Nome Simples",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalid\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"João\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Com Iniciais Minúsculas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalid\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"joão lima\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Email Sem Sucesso",
+					"item": [
+						{
+							"name": "400 Campo Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgEmailInvalidEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Formato Inválido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgEmailInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"nome@.com\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Com espaço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgEmailInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"no me@dominio.com\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Senha Sem Sucesso",
+					"item": [
+						{
+							"name": "400 Campo Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 <8 Caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Te\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Te\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 >12 Caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Testando\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Testando\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Sem Letra Maiúscula",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Sem Letra Minúscula",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@TESTE\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@TESTE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Sem Caractere Especial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234teste\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Sem Números",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"abcd@Teste\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"abcd@Teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Confirmar Senhas Diferentes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidConfirmation\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"5678@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo Confirmação Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidConfirmationEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Perfil de Acesso Sem Sucesso",
+					"item": [
+						{
+							"name": "400 Campo Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgAccessProfileInvalidEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CPF sem sucesso",
+					"item": [
+						{
+							"name": "400 Campo Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgCpfEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 >11 caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não realizado\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgCpfInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"123456789123\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "403 Acesso Negado Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Access Denied Token\", function () {\r",
+									"    pm.expect(pm.globals.get(\"msgAccessDenied\")).to.eql(JSON.parse(responseBody).errors[0]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "409 Conflito CPF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Conflict CPF\", function () {\r",
+									"    pm.expect(pm.globals.get(\"msgConflictCpf\")).to.eql(JSON.parse(responseBody).alert[0]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"Abul Lima Souza\",\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"1234@Test\",\r\n  \"accessProfile\": \"ADMIN\",\r\n  \"cpf\": \"44437630315\",\r\n  \"confirmPassword\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login de Acesso",
+			"item": [
+				{
+					"name": "Login novo cadastro com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Login efetuado com sucesso\", function () {\r",
+									"    var jsonName = pm.response.json();\r",
+									"    var expectedMessage = \"Olá \" + pm.environment.get(\"fullName\") + \", autenticação autorizada com sucesso!\";\r",
+									"    pm.expect(jsonName.msg).to.eql(expectedMessage);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"tokenUsers\", pm.variables.replaceIn(JSON.parse(responseBody).token));\r",
+									"\r",
+									"pm.test(\"Check token is true\", function (){\r",
+									"    pm.expect(JSON.parse(responseBody).token).exist\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Campo Email Vazio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Login não Realizado\", function () {\r",
+									"   pm.expect(pm.globals.get(\"msgAuthMailInvalid\")).to.eql(JSON.parse(responseBody).mail)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{tokenUsers}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Campo Senha Vazio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Login não Realizado\", function () {\r",
+									"   pm.expect(pm.globals.get(\"msgAuthSenhaInvalid\")).to.eql(JSON.parse(responseBody).password)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{tokenUsers}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Campo Email Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Login não Realizado\", function () {\r",
+									"   pm.expect(pm.globals.get(\"msgAuthInvalid\")).to.eql(JSON.parse(responseBody).alert)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{tokenUsers}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"joana@gmail.com\",\r\n  \"password\": \"1234@Test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Campo Senha Inválida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Login não Realizado\", function () {\r",
+									"   pm.expect(pm.globals.get(\"msgAuthInvalid\")).to.eql(JSON.parse(responseBody).alert)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{tokenUsers}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mail\": \"{{email}}\",\r\n  \"password\": \"KlarkKent2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Editar cadastro de login",
+			"item": [
+				{
+					"name": "Testes Com Sucesso",
+					"item": [
+						{
+							"name": "Funcional - Editar Nome de Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Nome atualizado com sucesso\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgUptadeSuccess\")).to.eql(JSON.parse(responseBody).msg)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const firstName = pm.variables.replaceIn('{{$randomFirstName}}')\r",
+											"const lastName = pm.variables.replaceIn('{{$randomLastName}}')\r",
+											"const fullName = `${firstName} ${lastName}`\r",
+											"pm.environment.set(\"fullName\", fullName)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Funcional - Editar Email  de Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Email atualizado com sucesso\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgUptadeSuccess\")).to.eql(JSON.parse(responseBody).msg)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const fullName = pm.variables.replaceIn('{{fullName}}')\r",
+											"const email = fullName.replace(\" \", \"_\")+\"@example.com\"\r",
+											"\r",
+											"pm.environment.set(\"email\", email.replace(/\\s/g, '').toLowerCase())"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\"\r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Funcional - Editar Senha  de Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha atualizada com sucesso!\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgUpdatePasswordSuccess\")).to.eql(JSON.parse(responseBody).msg)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"password\", pm.variables.replaceIn('{{password}}'))"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"{{newPassword}}\",\r\n  \"confirmPassword\": \"{{newPassword}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Funcional - Editar Status de Usuário",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status atualizado com sucesso\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgUpdateStatusSuccess\")).to.eql(JSON.parse(responseBody).msg)\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{token}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/status/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"status",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Nome Sem Sucesso",
+					"item": [
+						{
+							"name": "400 Campo nome em branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalidEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo nome com +100 Caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalidMaxCharacters\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"João Maria da Silva Costa Soares Menezes Lima Souza de Jesus Gonçalves Pereira Ferrares dos Santos Jr\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo nome com números",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalidNumber\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"Maria4 Rosario\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo nome com caracteres especiais",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalid\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"mari@ rosario\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo nome com iniciais minúsculas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalid\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"maria rosario\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo nome sem sobrenome",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Cadastro não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgNameInvalid\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"Maria\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Email Sem Sucesso",
+					"item": [
+						{
+							"name": "400 Campo email com formato Inválido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Usuário não atualizado\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgEmailInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"teste@testecom\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo email com espaço entre nome e domínio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Usuário não atualizado\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgEmailInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"teste @teste.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo email em branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Usuário não atualizado\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgEmailInvalidEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"Leo Dietrich\",\r\n  \"mail\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "403 Nome e email- Acesso sem token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Acesso Negado\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgAccessDenied\")).to.eql(JSON.parse(responseBody).errors[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 Nome e email - Erro Interno do Servidor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Erro Interno do Servidor\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Cast to ObjectId failed for value\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"{{fullName}}\",\r\n  \"mail\": \"{{email}}\"\r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/5d8eeab62c4338de3ca6b86",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"5d8eeab62c4338de3ca6b86"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Senha Sem Sucesso",
+					"item": [
+						{
+							"name": "403 Senha - Acesso sem token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Acesso Negado\", function (){\r",
+											"    pm.expect(pm.globals.get(\"msgAccessDenied\")).to.eql(JSON.parse(responseBody).errors[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"{{password}}\",\r\n  \"confirmPassword\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "409 Conflito entre senha nova e senha antiga",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 409\", function () {\r",
+											"    pm.response.to.have.status(409);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgUpdateStatusNoSuccess\")).to.eql(JSON.parse(responseBody).msg)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"5678@Test\",\r\n  \"confirmPassword\": \"5678@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 Senha - Erro Interno Servidor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Erro Interno do Servidor\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Cast to ObjectId failed for value\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"{{password}}\",\r\n  \"confirmPassword\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/5d8eeab62c4338de3ca6b86",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"5d8eeab62c4338de3ca6b86"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha em branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidEmpty2\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"packages": {},
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"\",\r\n  \"confirmPassword\": \"1234@Teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha com menos de 8 Caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function () {\r",
+											"    console.log(JSON.parse(responseBody).error)\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[1])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"123@Te\",\r\n  \"confirmPassword\": \"123@Te\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha com  mais de 12 Caracteres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function () {\r",
+											"    console.log(JSON.parse(responseBody).error)\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidFormat\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"1234@Testandooo\",\r\n  \"confirmPassword\": \"1234@Testandooo\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha sem letra maiúscula",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidValue\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"1234@teste\",\r\n  \"confirmPassword\": \"1234@teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha sem letra minúscula",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidValue\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"1234@TESTE\",\r\n  \"confirmPassword\": \"1234@TESTE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha sem caractere especial",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidValue\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"1234Teste\",\r\n  \"confirmPassword\": \"1234Teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo senha sem número",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidValue\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"abcd@Teste\",\r\n  \"confirmPassword\": \"abcd@Teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Confirmação de senhas diferentes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function(){\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidConfirmation\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"1234@Test\",\r\n  \"confirmPassword\": \"5678@Test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 Campo confirmação de senha em branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Senha não foi atualizada\", function () {\r",
+											"    pm.expect(pm.globals.get(\"msgSenhaInvalidConfirmationEmpty\")).to.eql(JSON.parse(responseBody).error[0])\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "apikey",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "{{tokenUsers}}",
+											"type": "string"
+										},
+										{
+											"key": "in",
+											"value": "query",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"1234@Test\",\r\n  \"confirmPassword\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/user/password/{{userId}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"user",
+										"password",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lista de cadastro de login",
+			"item": [
+				{
+					"name": "Funcional - Lista de cadastro de login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Apresentar lista de usuários\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"_id\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Acesso sem token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Acesso Negado\", function (){\r",
+									"    pm.expect(pm.globals.get(\"msgAccessDenied\")).to.eql(JSON.parse(responseBody).errors[0])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404 Usuário não existente na base de dados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Usuário não encontrado\", function () {\r",
+									"    pm.expect(pm.globals.get(\"msgUserNotFound\")).to.eql(JSON.parse(responseBody).alert[0])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65dcce5862c4338de3ca85fc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65dcce5862c4338de3ca85fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 Erro Interno Servidor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Erro Interno do Servidor\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cast to ObjectId failed for value\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65d8eeab62c4338de3ca6b8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65d8eeab62c4338de3ca6b8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contagem de Usuários",
+			"item": [
+				{
+					"name": "Contagem de usuários com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Contagem efetuada\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"count\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/count",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contagem de usuários sem sucesso - Acesso Negado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Acesso Negado\", function (){\r",
+									"    pm.expect(pm.globals.get(\"msgAccessDenied\")).to.eql(JSON.parse(responseBody).errors[0])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/count",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mostrar Usuários",
+			"item": [
+				{
+					"name": "Mostrar usuário com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Usuário encontrado\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"userId\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{tokenUsers}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar usuário sem sucesso - Acesso Negado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Acesso negado\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"No token provided.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65d8eeab62c4338de3ca6b86",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65d8eeab62c4338de3ca6b86"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar usuário sem sucesso - Não encontrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Usuário não encontrado\", function () {\r",
+									"    pm.expect(pm.globals.get(\"msgUserNotFound\")).to.eql(JSON.parse(responseBody).alert[0])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65dcce5862c4338de3ca85fc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65dcce5862c4338de3ca85fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar usuário sem sucesso - Erro Interno Servidor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Erro Interno do Servidor\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cast to ObjectId failed for value\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65dcce5862c4338de3ca85f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65dcce5862c4338de3ca85f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Excluir cadastro de login",
+			"item": [
+				{
+					"name": "Funcional - Excluir cadastro de login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Usuário deletado com sucesso!\", function () {\r",
+									"    pm.expect(pm.globals.get(\"msgUserDeleted\")).to.eql(JSON.parse(responseBody).msg);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "400 Usuário não existente na base de dados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Usuário não existe no banco de dados\"), function(){\r",
+									"    pm.expect(pm.globals.get(\"msgUserNotFound\")).to.eql(JSON.parse(reponseBody).alert[0])\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65dcce5862c4338de3ca85fc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65dcce5862c4338de3ca85fc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "403 Acesso sem token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Acesso Negado\", function (){\r",
+									"    pm.expect(pm.globals.get(\"msgAccessDenied\")).to.eql(JSON.parse(responseBody).errors[0])\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/{{userId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "500 Erro Interno Servidor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Erro Interno do Servidor\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cast to ObjectId failed for value\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/65dcce5862c4338de3ca85f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"65dcce5862c4338de3ca85f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{tokenUsers}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
